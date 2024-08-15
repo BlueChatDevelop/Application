@@ -14,7 +14,9 @@ services:
       - app-network
 
   api:
-    build: ./Backend/Docker/Api
+    build:
+      context: ./Backend/
+      dockerfile: Docker/Api/Dockerfile
     environment:
       - DATABASE_HOST=db
       - DATABASE_USER=user
@@ -30,7 +32,7 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - ./Frontend:/usr/share/nginx/html
       - ./Backend/Docker/Site/nginx.conf:/etc/nginx/nginx.conf
